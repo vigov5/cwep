@@ -1,6 +1,6 @@
 {
   "name": "Chatwork Emoticons Plus",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "manifest_version": 2,
   "description": "Add Skype and custom emoticons to Chatwork. feedback to nguyen.anh.tien@framgia.com",
   "content_scripts": [

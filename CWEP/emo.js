@@ -32,6 +32,7 @@ emo = [
 	{key: "(wtf)", regex: /\(wtf\)/g,	src: "wtf.gif", other_host: false},
 	{key: "(giggle)", regex: /\(giggle\)/g,	src: "giggle.gif", other_host: false},
 	{key: "(chuckle)", regex: /\(chuckle\)/g,	src: "giggle.gif", other_host: false},
+	{key: "(shit)", regex: /\(shit\)/g,	src: "shit.gif", other_host: false},
 	{key: ":-&quot;", regex: /:\-&quot;/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/65.gif", other_host: true},
 	{key: ":-c", regex: /:-c/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/101.gif", other_host: true},
 	{key: ">:/", regex: /&gt;:\//g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/70.gif", other_host: true},
@@ -48,7 +49,6 @@ emo = [
 	{key: "(cry)", regex: /\(cry\)/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/20.gif", other_host: true},
 	{key: "(hug)", regex: /\(hug\)/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/6.gif", other_host: true},
 	{key: "%-(", regex: /%-\(/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/107.gif", other_host: true},
-	{key: ":>", regex: /:&gt;/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/15.gif", other_host: true},
 	{key: ":-??", regex: /:-\?\?/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/106.gif", other_host: true},
 	{key: ":-?", regex: /:\-\?/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/39.gif", other_host: true},
 	{key: "=P~", regex: /=P~/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/38.gif", other_host: true},
@@ -78,7 +78,9 @@ emo = [
 	{key: "B-)", regex: /B-\)/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/16.gif", other_host: true},
 	{key: "[-(", regex: /\[-\(/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/33.gif", other_host: true},
 	{key: ":-S", regex: /:-S/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/17.gif", other_host: true},
-	{key: "~:>", regex: /\~:&gt;/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/52.gif", other_host: true},
+	{key: "", regex: /\~:&gt;/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/52.gif", other_host: true},
+	{key: "", regex: /:&gt;/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/15.gif", other_host: true},
+	{key: "8->", regex: /8-&gt;/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/105.gif", other_host: true},
 ];
 
 function htmlEncode(value){

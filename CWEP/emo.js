@@ -1,6 +1,7 @@
 emo = [
 	{key: "(facepalm)", regex: /\(facepalm\)/g, src: "facepalm.gif", other_host: false},
 	{key: "(facepalm2)", regex: /\(facepalm2\)/g, src: "facepalm2.gif", other_host: false},
+	{key: "(godzilla_facepalm)", regex: /\(godzilla_facepalm\)/g, src: "godzilla_facepalm.png", other_host: false},
 	{key: "(dull)", regex: /\(dull\)/g, src: "dull.gif", other_host: false},
 	{key: "(mooning)", regex: /\(mooning\)/g, src: "mooning.gif", other_host: false},
 	{key: "(finger)", regex: /\(finger\)/g,	src: "finger.gif", other_host: false},
@@ -33,8 +34,25 @@ emo = [
 	{key: "(giggle)", regex: /\(giggle\)/g,	src: "giggle.gif", other_host: false},
 	{key: "(chuckle)", regex: /\(chuckle\)/g,	src: "giggle.gif", other_host: false},
 	{key: "(shit)", regex: /\(shit\)/g,	src: "shit.gif", other_host: false},
-	{key: "(chopmat)", regex: /\(chopmat\)/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/5.gif", other_host: true},
-	{key: "(cuoideu)", regex: /\(cuoideu\)/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/71.gif", other_host: true},
+	{key: "(ế)", regex: /\(ế\)/g,	src: "e.jpg", other_host: false},
+	{key: "(problem)", regex: /\(problem\?\)/g,	src: "problem.jpg", other_host: false},
+	{key: "(thế cơ à)", regex: /\(thế cơ à\)/g,	src: "thecoa.jpg", other_host: false},
+	{key: "(lên)", regex: /\(lên\)/g, src: "http:\/\/www.clubtuzki.com/emoticons/tuzki_038.gif", other_host: true},
+	{key: "(happybirthday)", regex: /\(happybirthday\)/g, src: "http:\/\/www.clubtuzki.com/emoticons/tuzki_034.gif", other_host: true},
+	{key: "(lộn cái bàn)", regex: /\(lộn cái bàn\)/g, src: "http:\/\/www.clubtuzki.com/emoticons/tuzki_047.gif", other_host: true},
+	{key: "(huhuhu)", regex: /\(huhuhu\)/g, src: "http:\/\/www.clubtuzki.com/emoticons/tuzki_002.gif", other_host: true},
+	{key: "(sleep)", regex: /\(sleep\)/g, src: "http:\/\/www.clubtuzki.com/emoticons/tuzki_027.gif", other_host: true},
+	{key: "(idontknow)", regex: /\(idontknow\)/g, src: "http:\/\/www.clubtuzki.com/emoticons/tuzki_014.gif", other_host: true},
+	{key: "(quẩy lên)", regex: /\(quẩy lên\)/g, src: "http:\/\/www.clubtuzki.com/emoticons/tuzki_025.gif", other_host: true},
+	{key: "(haiz)", regex: /\(haiz\)/g, src: "http:\/\/www.clubtuzki.com/emoticons/tuzki_020.gif", other_host: true},
+	{key: "(oh no)", regex: /\(oh no\)/g, src: "http:\/\/www.clubtuzki.com/emoticons/tuzki_011.gif", other_host: true},
+	{key: "(hí hí)", regex: /\(hí hí\)/g, src: "http:\/\/www.clubtuzki.com/emoticons/tuzki_046.gif", other_host: true},
+	{key: "(có gì hot)", regex: /\(có gì hot\)/g, src: "http:\/\/www.clubtuzki.com/emoticons/tuzki_045.gif", other_host: true},
+	{key: "(ko chịu đâu)", regex: /\(ko chịu đâu\)/g, src: "http:\/\/www.clubtuzki.com/emoticons/tuzki_019.gif", other_host: true},
+	{key: "(vậy là sao)", regex: /\(vậy là sao\)/g, src: "http:\/\/www.clubtuzki.com/emoticons/tuzki_031.gif", other_host: true},
+	{key: "(chớp mắt)", regex: /\(chớp mắt\)/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/5.gif", other_host: true},
+	{key: "(cười đểu)", regex: /\(cười đểu\)/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/71.gif", other_host: true},
+	{key: "(kill)", regex: /\(kill\)/g, src: "http:\/\/www.clubtuzki.com/emoticons/tuzki_015.gif", other_host: true},
 	{key: "(pray)", regex: /\(pray\)/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/63.gif", other_host: true},
 	{key: "(bowbowbow)", regex: /\(bowbowbow\)/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/77.gif", other_host: true},
 	{key: "(dancing)", regex: /\(dancing\)/g, src: "https:\/\/s.yimg.com/lq/i/mesg/emoticons7/69.gif", other_host: true},
@@ -104,8 +122,6 @@ function htmlDecode(value){
 
 
 $(window).ready(function(){
-	//CW.reg_cmp.push({key:/:\-"/g, rep: '<img src="https:\/\/s.yimg.com/lq/i/mesg/emoticons7/65.gif" alt="" title="" class="ui_emoticon"/>', reptxt:''});
-	CW.reg_cmp.push({key:/&gt;:D&lt;/g, rep: "<img src='https://s.yimg.com/lq/i/mesg/emoticons7/6.gif' alt='>:D<' title='>:D<' class='ui_emoticon'/>", reptxt:'>:D<'});
 	CW.prepareRegExp();
 	for (var index = 0; index < emo.length; index++) {
 		var encoded_text = htmlEncode(emo[index].key);

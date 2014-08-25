@@ -1,0 +1,12 @@
+{
+  "name": "cwep",
+  "title": "Chatwork Emoticons Plus",
+  "id": "cwep@thangtd.com",
+  "description": "Add Skype and custom emoticons to Chatwork. feedback to nguyen.anh.tien@framgia.com",
+  "homepage": "http://cwep.thangtd.com",
+  "contributors": ["Tran Duc Thang", "Nguyen Thanh Tung"],
+  "icon": "data/icon-32.png",
+  "author": "Nguyen Anh Tien",
+  "license": "MPL 2.0",
+  "version": "0.2.4"
+}

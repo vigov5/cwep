@@ -2,11 +2,11 @@
   "name": "cwep",
   "title": "Chatwork Emoticons Plus",
   "id": "cwep@thangtd.com",
-  "description": "Add Skype and custom emoticons to Chatwork. feedback to nguyen.anh.tien@framgia.com",
+  "description": "Add Skype and custom emoticons to Chatwork.\n- Upgraded to compatible with YACEP by tran.duc.thang@framgia.com, using 'Default' version.\nFeedback to nguyen.anh.tien@framgia.com",
   "homepage": "http://cwep.thangtd.com",
   "contributors": ["Tran Duc Thang", "Nguyen Thanh Tung"],
   "icon": "data/icon-32.png",
   "author": "Nguyen Anh Tien",
   "license": "MPL 2.0",
-  "version": "0.2.4"
+  "version": "0.3.0"
 }

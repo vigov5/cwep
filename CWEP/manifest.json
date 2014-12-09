@@ -1,25 +1,22 @@
 {
-  "name": "Chatwork Emoticons Plus",
-  "version": "0.2.4",
+  "name": "Chatwork Enhancement Toolkit",
+  "version": "0.1.0",
   "manifest_version": 2,
-  "description": "Add Skype and custom emoticons to Chatwork. feedback to nguyen.anh.tien@framgia.com",
+  "description": "Add Github @mention to Chatwork. feedback to nguyen.anh.tien@framgia.com",
   "content_scripts": [
     {
       // Change 'matches' attribute to load content
       // script only in pages you want to.
       "matches": ["https://www.chatwork.com/*", "https://kcw.kddi.ne.jp/*"],
-      "js": ["jquery-1.11.1.min.js", "emo.js", "contentscript.js"],
+      "js": ["jquery-1.11.1.min.js", "contentscript.js"],
       "run_at": "document_end"
     }
   ],
-  "web_accessible_resources": ["emo.js"],
+  "web_accessible_resources": ["main.js", "fuse.min.js", "caretposition.js"],
   "browser_action": {
-    "default_icon": "icon.png",
-    "default_popup": "popup.html"
+    "default_icon": "icon.png"
   },
   "icons": {
     "48": "icon.png"
-  },
-  "update_url": "http://cwep.thangtd.com/update-xml/updates.xml",
-  "homepage_url": "http://cwep.thangtd.com"
+  }
 }

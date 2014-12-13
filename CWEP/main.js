@@ -144,7 +144,7 @@ $(window).ready(function(){
                 }
             }
             if (e.which == 9 || e.which == 13 && is_displayed) {
-                if ($(".suggested-name").first()) {
+                if ($(".suggested-name").first().length) {
                     setSuggestedChatText(getTypedText(), $(".suggested-name .autotrim").first().text(), $(".suggested-name").first().data('cwui-lt-value'));                
                 } else {
                     // there's no thing after @ symbol

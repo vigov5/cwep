@@ -3,9 +3,14 @@ $(window).ready(function(){
     var start = /@/ig;
     var is_displayed = false;
     var is_inserted = false;
+    var is_navigated = false;
+    var is_outbound_of_list = false;
+    var current_index = 0;
+    var selected_index = 0;
     var current_RM = null;
     var member_objects = [];
     var fuse = null;
+    var DISPLAY_NUMS = 3;
     var options = {
         keys: ['keys'],
     };
@@ -14,12 +19,13 @@ $(window).ready(function(){
 
     $("<div id='suggestion-container' class='toolTipListWidth toolTip toolTipWhite mainContetTooltip'></div>").insertAfter("#_chatText");
     hideSuggestionBox();
-    
+
     function findAtmark(){
         content = chat_text_jquery.val();
         atmarks = content.match(start);
         // we only interested in @ symbol that: at the start of line or has a space before it
-        if (content.lastIndexOf("@") != 0 && content.charAt(content.lastIndexOf("@") - 1) != " ") {
+        last_atmark_index = content.lastIndexOf("@");
+        if (last_atmark_index != 0 && (content.charAt(last_atmark_index - 1) != " " && content.charAt(last_atmark_index - 1) != "\n")) {
             return false;
         }
         if (atmarks) {
@@ -38,6 +44,7 @@ $(window).ready(function(){
     function getTypedText(){
         content = chat_text_jquery.val();
         start_pos = content.lastIndexOf("@");
+        if (start_pos == -1) return '';
         end_pos = doGetCaretPosition(chat_text_element);
         txt = content.substr(start_pos, end_pos);
         if (txt) {
@@ -63,7 +70,11 @@ $(window).ready(function(){
         is_inserted = false;
         $("#suggestion-container").html(content).show();
         $("#suggestion-container").css('visibility', 'visible');
-        $(".suggested-name").first().css("background-color", "#D8F0F9");
+        if (is_navigated) {
+            $(".suggested-name").eq(selected_index).css("background-color", "#D8F0F9");
+        } else {
+            $(".suggested-name").first().css("background-color", "#D8F0F9");
+        }
 
         $(".suggested-name").click(function () {
             if (is_inserted) return;
@@ -71,13 +82,14 @@ $(window).ready(function(){
             $(this).css("background-color", "#D8F0F9");
             setSuggestedChatText(getTypedText(), $(this).text(), $(this).data('cwui-lt-value'));
         });
-        
+
         $(".suggested-name" ).mouseover(function() {
             $(this).siblings().css("background-color", "white");
             $(this).css("background-color", "#D8F0F9");
         });
-        
+
         $(".suggested-name" ).mouseout(function() {
+            $(this).siblings().first().css("background-color", "#D8F0F9");
             $(this).css("background-color", "white");
         });
     }
@@ -86,6 +98,9 @@ $(window).ready(function(){
         $("#suggestion-container").html(content).hide();
         $("#suggestion-container").css('visibility', 'hidden');
         is_displayed = false;
+        is_navigated = false;
+        current_index = 0;
+        selected_index = 0;
     }
 
     // http://blog.vishalon.net/index.php/javascript-getting-and-setting-caret-position-in-textarea/
@@ -118,10 +133,32 @@ $(window).ready(function(){
         }
     }
 
-    // hide suggestion box when cick in textarea
+    function filterDisplayResults(results){
+        is_outbound_of_list = false;
+        if (!is_navigated) return results.slice(0, DISPLAY_NUMS);
+        if (current_index < 0) current_index = 0;
+        if (current_index >= results.length) current_index = results.length - 1;
+
+        if (results.length <= DISPLAY_NUMS) return results;
+        if (current_index >= results.length - DISPLAY_NUMS) {
+            is_outbound_of_list = true;
+            return results.slice(DISPLAY_NUMS * -1);
+        } else return results.slice(current_index, current_index + DISPLAY_NUMS);
+    }
+
+    // hide suggestion box when cick in textarea or outside
     chat_text_jquery.click(function(){
         hideSuggestionBox();
     });
+
+    $('#_roomListArea').click(function(){
+        hideSuggestionBox();
+    });
+
+    $('#_headerSearch').click(function(){
+        hideSuggestionBox();
+    });
+
 
     chat_text_jquery.keyup(function(e) {
         if (current_RM != RM.id) {
@@ -129,31 +166,55 @@ $(window).ready(function(){
             fuse = new Fuse(member_objects, options);
             current_RM = RM.id;
         }
-        
+
         if (findAtmark()) {
             if (!is_displayed) {
                 setSuggestionBoxPosition();
-                showSuggestionBox(buildList(member_objects));
+                showSuggestionBox(buildList(filterDisplayResults(member_objects)));
                 is_displayed = true;
             }
+
             if (getTypedText().length) {
                 if (getTypedText().substring(1)) {
-                    showSuggestionBox(showSuggestionBox(buildList(fuse.search(getTypedText().substring(1)))));
+                    raw_results = fuse.search(getTypedText().substring(1));
                 } else {
-                    showSuggestionBox(buildList(member_objects));
+                    raw_results = member_objects;
                 }
+
+                if (e.which == 38) current_index -= 1;
+                if (e.which == 40) current_index += 1;
+
+                filtered_results = filterDisplayResults(raw_results);
+
+                if (e.which == 38 && is_outbound_of_list) {
+                    selected_index -= 1;
+                    if (selected_index < 0) selected_index = 0;
+                }
+                if (e.which == 40 && is_outbound_of_list) {
+                    selected_index += 1;
+                    if (selected_index >= DISPLAY_NUMS) selected_index = DISPLAY_NUMS - 1;
+                }
+
+                showSuggestionBox(buildList(filtered_results));
             }
-            if (e.which == 9 || e.which == 13 && is_displayed) {
+
+            if (e.which == 9 || e.which == 13) {
                 if ($(".suggested-name").first().length) {
-                    setSuggestedChatText(getTypedText(), $(".suggested-name .autotrim").first().text(), $(".suggested-name").first().data('cwui-lt-value'));                
+                    if (is_navigated) {
+                        $(".suggested-name").eq(selected_index).click();
+                    } else {
+                        $(".suggested-name").first().click();
+                    }
                 } else {
                     // there's no thing after @ symbol
                     hideSuggestionBox();
                 }
             }
-            if (e.which == 27 && is_displayed) {
+
+            if (e.which == 27) {
                 // when user press ESC, we hide suggestion box
                 hideSuggestionBox();
+                holdCaretPosition(e);
             }
         } else {
             hideSuggestionBox();
@@ -162,10 +223,19 @@ $(window).ready(function(){
         return false;
     });
 
+    function holdCaretPosition(event_object) {
+        event_object.preventDefault();
+        chat_text_jquery.focus();
+        current_pos = doGetCaretPosition(chat_text_element);
+        setCaretPosition(chat_text_element, current_pos);
+    }
+
     chat_text_jquery.keydown(function (e) {
-        if ((e.which == 9 || e.which == 13) && is_displayed) {
-            chat_text_jquery.focus();
-            e.preventDefault();
+        if ((e.which == 9 || e.which == 13 || e.which == 38 || e.which == 40) && is_displayed) {
+            is_navigated = true;
+            holdCaretPosition(e);
+        } else {
+            is_navigated = false;
         }
     });
 

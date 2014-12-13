@@ -1,6 +1,6 @@
 {
   "name": "Chatwork Enhancement Toolkit",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "manifest_version": 2,
   "description": "Add Github @mention to Chatwork. feedback to nguyen.anh.tien@framgia.com",
   "content_scripts": [

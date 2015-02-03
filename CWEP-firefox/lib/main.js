@@ -78,7 +78,7 @@ pageMod.PageMod({
 
 function updateEmoticons(){
     Request({
-        url: "https://dl.dropboxusercontent.com/sh/rnyip87zzjyxaev/AACBVYHPxG88r-1BhYuBNkmHa/new.json?dl=1",
+        url: "https://gist.githubusercontent.com/vigov5/f357decddeebeb715fc7/raw/35abbf3c9c57549b5f965ec92a955662bbc8312d/all_emo.json",
         onComplete: function (response) {
             raw_data = JSON.parse(response.text);
             ss.storage.emo_data_name = raw_data["data_name"];

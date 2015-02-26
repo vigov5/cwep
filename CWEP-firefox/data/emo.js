@@ -1,5 +1,5 @@
 
-var DEFAULT_IMG_HOST = "http://yacep.thangtd.com/";
+var DEFAULT_IMG_HOST = "http://chatpp.thangtd.com/";
 
 function htmlEncode(value){
     //create a in-memory div, set it's inner text(which jQuery automatically encodes)
